@@ -7,7 +7,7 @@ import (
 
     "github.com/gin-gonic/gin"
     "go.mongodb.org/mongo-driver/bson"
-    "practicego/config" // Use your actual module name here
+    "practicego/config" 
 )
 
 type Blog struct {
@@ -17,11 +17,11 @@ type Blog struct {
 }
 
 func main() {
-    config.ConnectDB() // Initialize MongoDB connection
+    config.ConnectDB()
 
     r := gin.Default()
     r.GET("/blogs", getBlogs)
-    r.Run(":8080") // Start the server on port 8080
+    r.Run(":8080") 
 }
 
 func getBlogs(c *gin.Context) {
