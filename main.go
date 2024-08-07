@@ -1,28 +1,51 @@
-package main
+package config
 
 import (
-	"html/template"
-	"net/http"
+    "context"
+    "net/http"
+    "time"
+
+    "github.com/gin-gonic/gin"
+    "go.mongodb.org/mongo-driver/bson"
+    "practicego/config" // Replace with your actual module name
 )
 
-// PageData holds data to pass to the HTML template
-type PageData struct {
-	Title string
+type Blog struct {
+    ID      int    `json:"id" bson:"id"`
+    Title   string `json:"title" bson:"title"`
+    Content string `json:"content" bson:"content"`
 }
 
 func main() {
-	http.HandleFunc("/", homeHandler)
-	// Serve static files from the "static" directory
-	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	http.ListenAndServe(":8081", nil)
+    config.ConnectDB() // Initialize MongoDB connection
+
+    r := gin.Default()
+    r.GET("/blogs", getBlogs)
+    r.Run(":8080") // Start the server on port 8080
 }
 
-func homeHandler(w http.ResponseWriter, r *http.Request) {
-	data := PageData{Title: "Daily Journal"}
-	tmpl, err := template.ParseFiles("templates/template.html")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	tmpl.Execute(w, data)
+func getBlogs(c *gin.Context) {
+    var blogs []Blog
+    ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+    defer cancel()
+
+    cursor, err := config.BlogCollection.Find(ctx, bson.M{})
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        return
+    }
+    defer cursor.Close(ctx)
+
+    for cursor.Next(ctx) {
+        var blog Blog
+        cursor.Decode(&blog)
+        blogs = append(blogs, blog)
+    }
+
+    if err := cursor.Err(); err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        return
+    }
+
+    c.JSON(http.StatusOK, blogs)
 }
