@@ -1,4 +1,4 @@
-package config
+package main
 
 import (
     "context"
@@ -7,7 +7,7 @@ import (
 
     "github.com/gin-gonic/gin"
     "go.mongodb.org/mongo-driver/bson"
-    "practicego/config" // Replace with your actual module name
+    "practicego/config" // Use your actual module name here
 )
 
 type Blog struct {

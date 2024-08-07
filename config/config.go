@@ -1,4 +1,5 @@
-package main
+// config/config.go
+package config
 
 import (
     "context"
@@ -13,7 +14,7 @@ var BlogCollection *mongo.Collection
 
 func ConnectDB() {
     // Set MongoDB client options
-    clientOptions := options.Client().ApplyURI("mongodb://localhost:27017") // Replace with your MongoDB URI
+    clientOptions := options.Client().ApplyURI("mongodb+srv://pkp-admin:param22@cluster0.kftllgo.mongodb.net/blogDB?retryWrites=true&w=majority") // Replace with your MongoDB URI
 
     // Connect to MongoDB
     var err error
@@ -31,5 +32,5 @@ func ConnectDB() {
     log.Println("Connected to MongoDB!")
 
     // Get the blog collection
-    BlogCollection = Client.Database("blogDB").Collection("blogs") // Replace with your database and collection names
+    BlogCollection = Client.Database("blogDB").Collection("posts") // Replace with your database and collection names
 }
