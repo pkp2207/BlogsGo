@@ -10,7 +10,7 @@ Enhanced UI design for a more polished and user-friendly experience.
 This project aims to offer similar functionality to [this blog platform](https://blogweb-e1pz.onrender.com/).
 
 How to run:-
-Run the application using the "go run main.go" command.
+Run the application using the "go run main.go" command and the route to be opened is localhost:8080/blogs.
  
 MONGODB_URI would require appropriate username and password. 
 Hit me up for the same, if required.
