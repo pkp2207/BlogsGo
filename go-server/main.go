@@ -21,8 +21,8 @@ func main() {
     config.ConnectDB()
 
     r := gin.Default()
-
     r.Use(cors.Default())
+
     r.Static("/static", "../frontend/build/static")
 
     r.LoadHTMLGlob("../frontend/build/*.html")
