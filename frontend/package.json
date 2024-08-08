@@ -5,13 +5,22 @@
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd ../go-server && go run main.go",
-    "client": "react-scripts start"
+    "client": "react-scripts start",
+    "build": "react-scripts build"
   },
   "devDependencies": {
-    "concurrently": "^7.0.0"
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^7.0.0",
+    "postcss": "^8.4.41",
+    "react-scripts": "^5.0.1",
+    "tailwindcss": "^3.4.8"
   },
   "dependencies": {
-    "frontend": "file:"
+    "frontend": "file:",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.26.0",
+    "web-vitals": "^4.2.3"
   },
   "browserslist": {
     "production": [

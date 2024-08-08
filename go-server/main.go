@@ -25,9 +25,13 @@ func main() {
     // Set up CORS middleware
     r.Use(cors.Default())
 
-    r.Static("/static", "./frontend/public/static")
-    r.LoadHTMLGlob("frontend/public/*.html")
+    // Serve static files
+    r.Static("/static", "../frontend/build/static")
 
+    // Load HTML templates
+    r.LoadHTMLGlob("../frontend/build/*.html")
+
+    // API route
     r.GET("/blogs", getBlogs)
 
     // Serve the React app
@@ -35,7 +39,7 @@ func main() {
         c.HTML(http.StatusOK, "index.html", nil)
     })
 
-    r.Run(":8080")
+    r.Run(":3000")
 }
 
 func getBlogs(c *gin.Context) {
