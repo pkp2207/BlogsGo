@@ -5,9 +5,10 @@ import (
     "net/http"
     "time"
 
+    "github.com/gin-contrib/cors"
     "github.com/gin-gonic/gin"
     "go.mongodb.org/mongo-driver/bson"
-    "practicego/config" 
+    "practicego/config"
 )
 
 type Blog struct {
@@ -20,8 +21,21 @@ func main() {
     config.ConnectDB()
 
     r := gin.Default()
+
+    // Set up CORS middleware
+    r.Use(cors.Default())
+
+    r.Static("/static", "./frontend/public/static")
+    r.LoadHTMLGlob("frontend/public/*.html")
+
     r.GET("/blogs", getBlogs)
-    r.Run(":8080") 
+
+    // Serve the React app
+    r.NoRoute(func(c *gin.Context) {
+        c.HTML(http.StatusOK, "index.html", nil)
+    })
+
+    r.Run(":8080")
 }
 
 func getBlogs(c *gin.Context) {
