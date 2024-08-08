@@ -21,20 +21,14 @@ func main() {
     config.ConnectDB()
 
     r := gin.Default()
-
-    // Set up CORS middleware
     r.Use(cors.Default())
 
-    // Serve static files
     r.Static("/static", "../frontend/build/static")
 
-    // Load HTML templates
     r.LoadHTMLGlob("../frontend/build/*.html")
 
-    // API route
     r.GET("/blogs", getBlogs)
 
-    // Serve the React app
     r.NoRoute(func(c *gin.Context) {
         c.HTML(http.StatusOK, "index.html", nil)
     })
