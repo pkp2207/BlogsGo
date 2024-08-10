@@ -4,7 +4,6 @@ BlogsGo is a foundational Go application designed to retrieve and display data f
 
 Features to be Added:
 
-Blog composition functionality for users.
 Enhanced UI design for a more polished and user-friendly experience.
 
 This project aims to offer similar functionality to [this blog platform](https://blogweb-e1pz.onrender.com/).
