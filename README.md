@@ -11,7 +11,7 @@ This project aims to offer similar functionality to [this blog platform](https:/
 
 How to run:-
 Run the Go server using the "go run main.go" after navigating to the go-server directory.
-Run the NextJs application using the "npm run dev" command after navigating to the nextwithgo directory.
+Run the NextJs application using the "npm i" command to install dependencies and "npm run dev" command ,after navigating to the nextwithgo directory.
  
 MONGODB_URI would require appropriate username and password. 
 Hit me up for the same, if required.
