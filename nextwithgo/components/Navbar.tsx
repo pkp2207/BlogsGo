@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import styles from './Navbar.module.css'; // Import CSS module for styling
+import ThemeToggle from './ThemeToggle';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,6 +30,7 @@ const Navbar: React.FC = () => {
           <Link href="/about">About</Link>
         </li>
       </ul>
+      <ThemeToggle />
     </nav>
   );
 };

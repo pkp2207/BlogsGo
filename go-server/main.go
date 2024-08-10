@@ -31,8 +31,9 @@ func main() {
     r.Use(cors.Default())
 
     // Define API routes
-    r.GET("/blogs", getBlogs)          // Handle /blogs route
-    r.GET("/blogs/:id", getBlogByID)   // Handle /blogs/:id route
+    r.GET("/blogs", getBlogs)           // Handle /blogs route
+    r.GET("/blogs/:id", getBlogByID)    // Handle /blogs/:id route
+    r.POST("/blogs", createBlog)        // Handle POST /blogs route
 
     // Set up proxy to Next.js server
     r.NoRoute(func(c *gin.Context) {
@@ -102,4 +103,24 @@ func getBlogByID(c *gin.Context) {
     }
 
     c.JSON(http.StatusOK, blog)
+}
+
+func createBlog(c *gin.Context) {
+    var blog Blog
+    if err := c.ShouldBindJSON(&blog); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request payload"})
+        return
+    }
+
+    blog.ID = primitive.NewObjectID() // Generate a new ID
+    ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+    defer cancel()
+
+    _, err := config.BlogCollection.InsertOne(ctx, blog)
+    if err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": "Error inserting blog: " + err.Error()})
+        return
+    }
+
+    c.JSON(http.StatusCreated, blog)
 }
