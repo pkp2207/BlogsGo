@@ -1,39 +1,53 @@
 package main
 
 import (
-    "context"
-    "net/http"
-    "time"
+	"context"
+	"log"
+	"net/http"
+	"net/http/httputil"
+	"net/url"
+	"time"
 
-    "github.com/gin-contrib/cors"
-    "github.com/gin-gonic/gin"
-    "go.mongodb.org/mongo-driver/bson"
-    "practicego/config"
+	"practicego/config"
+
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type Blog struct {
-    ID      int    `json:"id" bson:"id"`
-    Title   string `json:"title" bson:"title"`
-    Content string `json:"content" bson:"content"`
+    ID      primitive.ObjectID `json:"id" bson:"_id"` // Ensure this matches your MongoDB schema
+    Title   string             `json:"title" bson:"title"`
+    Content string             `json:"content" bson:"content"`
 }
 
 func main() {
+    // Initialize MongoDB connection
     config.ConnectDB()
 
     r := gin.Default()
     r.Use(cors.Default())
 
-    r.Static("/static", "../frontend/build/static")
+    // Define API routes
+    r.GET("/blogs", getBlogs)          // Handle /blogs route
+    r.GET("/blogs/:id", getBlogByID)   // Handle /blogs/:id route
 
-    r.LoadHTMLGlob("../frontend/build/*.html")
-
-    r.GET("/blogs", getBlogs)
-
+    // Set up proxy to Next.js server
     r.NoRoute(func(c *gin.Context) {
-        c.HTML(http.StatusOK, "index.html", nil)
+        nextjsURL, err := url.Parse("http://localhost:3000") // Adjust to your Next.js server URL
+        if err != nil {
+            log.Fatalf("Error parsing Next.js server URL: %v", err)
+        }
+        proxy := httputil.NewSingleHostReverseProxy(nextjsURL)
+        proxy.ServeHTTP(c.Writer, c.Request)
     })
 
-    r.Run(":3000")
+    // Start the server
+    if err := r.Run(":3001"); err != nil {
+        log.Fatalf("Error starting server: %v", err)
+    }
 }
 
 func getBlogs(c *gin.Context) {
@@ -43,21 +57,49 @@ func getBlogs(c *gin.Context) {
 
     cursor, err := config.BlogCollection.Find(ctx, bson.M{})
     if err != nil {
-        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        c.JSON(http.StatusInternalServerError, gin.H{"error": "Error fetching blogs: " + err.Error()})
         return
     }
     defer cursor.Close(ctx)
 
     for cursor.Next(ctx) {
         var blog Blog
-        cursor.Decode(&blog)
+        if err := cursor.Decode(&blog); err != nil {
+            c.JSON(http.StatusInternalServerError, gin.H{"error": "Error decoding blog: " + err.Error()})
+            return
+        }
         blogs = append(blogs, blog)
     }
 
     if err := cursor.Err(); err != nil {
-        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        c.JSON(http.StatusInternalServerError, gin.H{"error": "Cursor error: " + err.Error()})
         return
     }
 
     c.JSON(http.StatusOK, blogs)
+}
+
+func getBlogByID(c *gin.Context) {
+    id := c.Param("id")
+    objID, err := primitive.ObjectIDFromHex(id)
+    if err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID format"})
+        return
+    }
+
+    var blog Blog
+    ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+    defer cancel()
+
+    err = config.BlogCollection.FindOne(ctx, bson.M{"_id": objID}).Decode(&blog)
+    if err != nil {
+        if err == mongo.ErrNoDocuments {
+            c.JSON(http.StatusNotFound, gin.H{"error": "Blog not found"})
+        } else {
+            c.JSON(http.StatusInternalServerError, gin.H{"error": "Error fetching blog: " + err.Error()})
+        }
+        return
+    }
+
+    c.JSON(http.StatusOK, blog)
 }
