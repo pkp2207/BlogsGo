@@ -4,17 +4,13 @@ BlogsGo is a foundational Go application designed to retrieve and display data f
 
 Features to be Added:
 
-Blog composition functionality for users.
 Enhanced UI design for a more polished and user-friendly experience.
 
 This project aims to offer similar functionality to [this blog platform](https://blogweb-e1pz.onrender.com/).
 
 How to run:-
-Run the application using the "go run main.go" command and the route to be opened is localhost:8080/blogs.
-
-Edit:-
-Added a basic React frontend for the same.
-Navigate to the frontend directory and run "npm start" on the terminal to start both the react app as well as the Go server.
+Run the Go server using the "go run main.go" after navigating to the go-server directory.
+Run the NextJs application using the "npm i" command to install dependencies and "npm run dev" command ,after navigating to the nextwithgo directory.
  
 MONGODB_URI would require appropriate username and password. 
 Hit me up for the same, if required.
