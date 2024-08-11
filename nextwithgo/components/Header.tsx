@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Navbar from './Navbar';
 import styles from './Header.module.css';
+import { ModeToggle } from './theme-change';
+import Navbar from './Navbar';
+import { Button } from './ui/button';
 
-const Header: React.FC = () => {
+function Header() {
   return (
-    <header className={`${styles.header} bg-gray-100 shadow-sm`}>
-      <div className="container mx-auto p-4 text-center">
-        
-        <Navbar />
-        <h1 className="text-2xl font-bold text-blue-600">
-          <Link href="/" className="flex items-center justify-center">
-            My Blog
-          </Link>
-        </h1>
-      </div>
-    </header>
+    <header className="mx-auto bg-gradient-to-b from-[#3B747D] to-[#A6CFD5] dark:bg-gradient-to-b dark:from-[#27233A] dark:to-[#0D0221] px-4 pt-8 pb-2 lg:px-14">
+    <div className="max-w-screen-2xl mx-auto">
+				<div className="w-full flex items-center justify-between mb-14">
+					<div className="flex items-center lg:gap-x-16">
+						<Navbar />
+					</div>
+					<div>
+					<ModeToggle />
+					</div>
+				</div>
+    </div>
+		</header>
   );
 };
 

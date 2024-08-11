@@ -17,6 +17,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import Header from "@/components/Header";
 import { postBlog } from "@/services/blogService";
+import { Input } from "@/components/ui/input";
 
 // Define the schema using zod
 const BlogFormSchema = z.object({
@@ -56,17 +57,18 @@ export default function Compose() {
   return (
     <div>
       <Header />
-      <h1>Compose a New Blog Post</h1>
+      <div className="pt-10 flex flex-col lg:px-24 px-4 gap-4 justify-center mb-10 bg-gradient-to-b from-[#A6CFD5] to-white dark:from-[#0D0221]">
+      <div className="text-5xl font-bold tracking-tighter bg-gradient-to-b from-[#14272A] to-[#223F44] dark:bg-gradient-to-b dark:from-[#250660] dark:to-[#eaeefe] text-transparent bg-clip-text pb-5">Compose a New Blog Post</div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="mt-10 space-y-8">
           <FormField
             control={form.control}
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Title</FormLabel>
+                <FormLabel className="flex gap-4 items-center">Title</FormLabel>
                 <FormControl>
-                  <input
+                  <Input
                     type="text"
                     placeholder="Enter the title of your blog"
                     className="input-class" // Adjust the class to your design
@@ -82,7 +84,7 @@ export default function Compose() {
             name="content"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Content</FormLabel>
+                <FormLabel className="flex gap-4 items-center">Content</FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Write your blog content here"
@@ -97,6 +99,7 @@ export default function Compose() {
           <Button type="submit">Submit</Button>
         </form>
       </Form>
+      </div>
     </div>
   );
 }
