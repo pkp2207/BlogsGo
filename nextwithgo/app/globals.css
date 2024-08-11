@@ -121,3 +121,40 @@
     border-color: var(--ring);
   }
 }
+/* Assuming you are using Tailwind CSS, you can define the following classes */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .card-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card h3 {
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  margin-bottom: 1rem;
+}
