@@ -70,12 +70,12 @@ export default function FeaturedPosts() {
       </div>
       <div className="mt-20 text-center">
         <Link href={"/blogs"}>
-          <button className="p-[3px] relative">
+          <Button className="p-[3px] relative">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-green-500 rounded-lg dark:bg-gradient-to-r dark:from-indigo-500 dark:to-purple-500" />
             <div className="px-8 py-2 bg-black rounded-[6px] relative group transition duration-200 text-white hover:bg-transparent">
               View All Blogs
             </div>
-          </button>
+          </Button>
         </Link>
       </div>
     </div>

@@ -1,5 +1,5 @@
 .header {
-  background-color: #f8f9fa; /* Light gray background */
+  background-color: #f8f9fa; 
   padding: 16px 0;
   box-shadow: 0 4px 2px -2px gray;
 }
@@ -8,7 +8,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 16px;
-  text-align: center; /* Center-align text and content */
+  text-align: center;
 }
 
 .title {
@@ -26,5 +26,5 @@
 .navbar {
   margin-top: 10px;
   display: flex;
-  justify-content: center; /* Center the navbar */
+  justify-content: center;
 }

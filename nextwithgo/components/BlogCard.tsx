@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Blog } from '../types/blog';
-import styles from './BlogCard.module.css'; // Import CSS module for styling
+import styles from './BlogCard.module.css';
 
 interface BlogCardProps {
   blog: Blog;
