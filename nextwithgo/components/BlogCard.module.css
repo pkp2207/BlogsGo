@@ -1,21 +1,29 @@
-/* BlogCard.module.css */
+/* Base styles for the blog card */
 .blogCard {
   @apply bg-card p-4 rounded-[var(--radius)] shadow-md transition-transform duration-200 ease-in-out mb-6; /* Add margin-bottom for spacing */
+  /* Add a subtle shadow to create the faint light effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Intensify the shadow on hover */
 .blogCard:hover {
   @apply translate-y-[-5px]; /* Lift effect on hover */
+  /* Increase shadow to create a more pronounced light effect */
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
 }
 
+/* Title styles */
 .blogTitle {
   @apply text-lg font-semibold mb-2 text-card-foreground; /* Apply global text styles */
 }
 
+/* Content styles */
 .blogContent {
   @apply text-base text-muted-foreground mb-4; /* Apply global text styles */
   line-height: 1.6; /* Improve readability */
 }
 
+/* Read more link styles */
 .readMore {
   @apply text-primary font-medium transition-colors duration-200; /* Apply global link styles */
 }
