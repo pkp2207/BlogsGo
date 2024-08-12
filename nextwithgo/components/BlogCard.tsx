@@ -13,10 +13,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
       <p className={styles.blogContent}>{blog.content.substring(0, 100)}...</p>
       <Link href={`/blogs/${blog.id}`} className={styles.readMore}>
         Read more
-        
       </Link>
-      console.log(`/blogs/${blog.id}`);
-
     </div>
   );
 };

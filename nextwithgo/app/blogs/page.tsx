@@ -5,6 +5,7 @@ import BlogCard from '../../components/BlogCard';
 import { Blog } from '../../types/blog';
 import Header from '@/components/Header';
 import Searchbar from '@/components/Searchbar';
+import { Link } from 'lucide-react';
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
@@ -49,7 +50,7 @@ const Blogs = () => {
       <div className='text-5xl font-bold tracking-tighter bg-gradient-to-b from-[#14272A] to-[#223F44] dark:bg-gradient-to-b dark:from-[#250660] dark:to-[#eaeefe] text-transparent bg-clip-text pb-5'>All Blog Posts</div>
       <Searchbar onSearch={handleSearch} />
       {filteredBlogs.length === 0 ? (
-        <div>No blog posts available.</div>
+        <div className='text-center'>No blog posts available. Add one by <Link href = '/blogs/compose'>this</Link></div>
       ) : (
         <ul>
           {filteredBlogs.map((blog: Blog) => (

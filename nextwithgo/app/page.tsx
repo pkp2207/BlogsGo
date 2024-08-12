@@ -13,15 +13,6 @@ export default function Home() {
       <NewsLetterSignup />
       <Testimonials />
 
-      {/* Footer Section
-      <footer className="py-8 bg-gray-800 text-white text-center">
-        <p>© 2024 My Blog. All rights reserved.</p>
-        <div className="flex justify-center space-x-4 mt-2">
-          <Link href="https://twitter.com" className="hover:text-blue-400">Twitter</Link>
-          <Link href="https://facebook.com" className="hover:text-blue-600">Facebook</Link>
-          <Link href="https://instagram.com" className="hover:text-pink-600">Instagram</Link>
-        </div>
-      </footer> */}
     </div>
   );
 }

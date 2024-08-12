@@ -1,27 +1,26 @@
+/* BlogCard.module.css */
 .blogCard {
-  border: 1px solid #ddd;
-  padding: 16px;
-  margin: 16px;
-  border-radius: 8px;
-  background-color: #fff;
+  @apply bg-card p-4 rounded-[var(--radius)] shadow-md transition-transform duration-200 ease-in-out mb-6; /* Add margin-bottom for spacing */
+}
+
+.blogCard:hover {
+  @apply translate-y-[-5px]; /* Lift effect on hover */
 }
 
 .blogTitle {
-  font-size: 1.5rem;
-  margin-bottom: 8px;
+  @apply text-lg font-semibold mb-2 text-card-foreground; /* Apply global text styles */
 }
 
 .blogContent {
-  font-size: 1rem;
-  color: #555;
+  @apply text-base text-muted-foreground mb-4; /* Apply global text styles */
+  line-height: 1.6; /* Improve readability */
 }
 
 .readMore {
-  font-size: 1rem;
-  color: #0070f3;
-  text-decoration: none;
+  @apply text-primary font-medium transition-colors duration-200; /* Apply global link styles */
 }
 
 .readMore:hover {
-  text-decoration: underline;
+  color: #ff5722; /* New color for hover effect */
+  text-decoration: underline; /* Keep underline on hover */
 }

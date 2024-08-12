@@ -18,26 +18,23 @@ import (
 )
 
 type Blog struct {
-    ID      primitive.ObjectID `json:"id" bson:"_id"` // Ensure this matches your MongoDB schema
+    ID      primitive.ObjectID `json:"id" bson:"_id"` 
     Title   string             `json:"title" bson:"title"`
     Content string             `json:"content" bson:"content"`
 }
 
 func main() {
-    // Initialize MongoDB connection
     config.ConnectDB()
 
     r := gin.Default()
     r.Use(cors.Default())
 
-    // Define API routes
-    r.GET("/blogs", getBlogs)           // Handle /blogs route
-    r.GET("/blogs/:id", getBlogByID)    // Handle /blogs/:id route
-    r.POST("/blogs", createBlog)        // Handle POST /blogs route
+    r.GET("/blogs", getBlogs)           
+    r.GET("/blogs/:id", getBlogByID)    
+    r.POST("/blogs", createBlog)        
 
-    // Set up proxy to Next.js server
     r.NoRoute(func(c *gin.Context) {
-        nextjsURL, err := url.Parse("http://localhost:3000") // Adjust to your Next.js server URL
+        nextjsURL, err := url.Parse("http://localhost:3000") 
         if err != nil {
             log.Fatalf("Error parsing Next.js server URL: %v", err)
         }
@@ -45,7 +42,6 @@ func main() {
         proxy.ServeHTTP(c.Writer, c.Request)
     })
 
-    // Start the server
     if err := r.Run(":3001"); err != nil {
         log.Fatalf("Error starting server: %v", err)
     }
@@ -112,7 +108,7 @@ func createBlog(c *gin.Context) {
         return
     }
 
-    blog.ID = primitive.NewObjectID() // Generate a new ID
+    blog.ID = primitive.NewObjectID()
     ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
     defer cancel()
 

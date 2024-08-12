@@ -1,42 +1,60 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  :root {
-    --background: 210 100% 97%;
-    --foreground: 339 20% 20%;
-    --primary: 308 56% 85%;
-    --primary-foreground: 210 22% 22%;
-    --secondary: 196 75% 88%;
-    --secondary-foreground: 210 22% 22%;
-    --accent: 211 86% 70%;
-    --accent-foreground: 210 22% 22%;
-    --destructive: 0 93% 73%;
-    --destructive-foreground: 210 22% 22%;
-    --muted: 210 100% 95%;
-    --muted-foreground: 210 22% 22%;
-    --card: 210 100% 97%;
-    --card-foreground: 210 22% 22%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 341 20% 22%;
-    --border: 210 40% 80%;
-    --input: 210 40% 56%;
-    --ring: 210 40% 60%;
-    --radius: 1rem;
-  }
+/* Default light mode styles */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
-@layer base {
-  * {
-    @apply border-gray-300; /* Use a standard Tailwind border color */
-  }
+header {
+  background-color: var(--header-bg);
+  color: var(--header-text);
+}
 
-  body {
-    @apply bg-gray-100 text-gray-900 font-sans; /* Use standard Tailwind utilities */
-  }
+header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  background-color: var(--heading-bg); /* Background color for heading */
+  padding: 0.5rem 1rem; /* Padding for the heading */
+  border-radius: 0.5rem; /* Optional rounded corners */
+}
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold; /* Use a standard Tailwind font weight */
-  }
+article {
+  background-color: var(--background);
+  color: var(--body-text);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+article p {
+  line-height: 1.6;
+}
+
+/* Dark mode styles */
+.dark-mode {
+  --background: 260 10% 20%; /* Dark background */
+  --foreground: 210 30% 90%; /* Light text */
+  --primary: 260 50% 50%; /* Purple */
+  --primary-foreground: 210 30% 90%; /* Light blue */
+  --header-bg: 260 30% 40%; /* Darker purple for header */
+  --header-text: 210 30% 90%; /* Light blue for header text */
+  --body-text: 210 30% 90%; /* Light blue for body text */
+  --heading-bg: 260 30% 50%; /* Darker purple background for heading */
+}
+
+.dark-mode body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.dark-mode article {
+  background-color: var(--background); /* Dark background in dark mode */
+  color: var(--body-text);
+}
+
+.dark-mode header {
+  background-color: var(--header-bg);
+  color: var(--header-text);
+}
+
+.dark-mode header h1 {
+  background-color: var(--heading-bg); /* Darker background for heading in dark mode */
 }
