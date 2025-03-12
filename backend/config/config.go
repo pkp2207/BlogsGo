@@ -17,9 +17,8 @@ var (
 )
 
 func ConnectDB() {
-    if err := godotenv.Load(); err != nil {
-        log.Fatalf("Error loading .env file: %v", err)
-    }
+    _ = godotenv.Load() // Silently ignore missing .env file
+
 
     mongoURI := os.Getenv("MONGODB_URI")
     if mongoURI == "" {
