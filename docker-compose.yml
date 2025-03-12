@@ -1,15 +1,13 @@
 version: '3.8'
 
 services:
-  go-server:
+  backend:
     build:
-      context: ./go-server  # Path to the Go server folder
+      context: ./backend  # Path to the Go server folder
     ports:
       - "3001:3001"
-    environment:
-      - MONGODB_URI=mongodb+srv://pkp-admin:param22@cluster0.kftllgo.mongodb.net/blogDB?retryWrites=true&w=majority
     env_file:
-      - ./go-server/.env
+      - ./backend/.env
     networks:
       - blog-network
     depends_on:
@@ -18,16 +16,16 @@ services:
 
   nextjs:
       build:
-        context: ./nextwithgo
+        context: ./frontend
       ports:
         - "3000:3000"
       environment:
         - NODE_ENV=production
-        - NEXT_PUBLIC_API_URL=http://go-server:3001  # Pass API URL
+        - NEXT_PUBLIC_API_URL=http://backend:3001  # Pass API URL
       networks:
         - blog-network
       depends_on:
-        - go-server
+        - backend
       restart: always
 
   mongo:
