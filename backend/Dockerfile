@@ -4,11 +4,11 @@ FROM golang:1.22 AS builder
 # Set the working directory
 WORKDIR /app
 
-# Copy only go.mod (omit go.sum if it's missing)
-COPY go.mod . 
+# Copy go.mod and go.sum
+COPY go.mod go.sum . 
 
-# Download dependencies (skip checksum verification if needed)
-RUN go mod tidy
+# Download dependencies
+RUN go mod download
 
 # Copy the source code
 COPY . .
@@ -30,4 +30,4 @@ RUN chmod +x ./main
 EXPOSE 3001
 
 # Command to run the application
-CMD ["./main"]
+ENTRYPOINT ["./main"]
