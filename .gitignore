@@ -33,8 +33,6 @@ pnpm-lock.yaml
 *.sublime-workspace
 
 # Go specific
-go.sum
-go.mod
 *.exe
 *.exe~
 *.dll
