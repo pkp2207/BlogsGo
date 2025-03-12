@@ -1,5 +1,8 @@
 # BlogsGo
 
+# Dockerised:-
+Run using "docker-compose up --build". The entire application will run
+
 # How to run:-
 Run the Go server using the "go run main.go" after navigating to the go-server directory.
 Run the NextJs application using the "npm i" command to install dependencies and "npm run dev" command ,after navigating to the nextwithgo directory.
