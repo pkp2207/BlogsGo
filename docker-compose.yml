@@ -19,7 +19,7 @@ services:
       context: ./frontend
     environment:
       - NODE_ENV=production
-      - NEXT_PUBLIC_API_URL=/api  # API route handled by Nginx
+      - NEXT_PUBLIC_API_URL=https://blogsgo-backend.onrender.com/api  # API route handled by Nginx
     networks:
       - blog-network
     depends_on:
