@@ -8,7 +8,7 @@ import (
 	"net/url"
 	"time"
 
-	"practicego/config"
+    "github.com/pkp2207/BlogsGo/backend/config"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"

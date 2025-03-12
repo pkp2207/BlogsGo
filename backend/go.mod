@@ -1,4 +1,4 @@
-module github.com/pkp2207/BlogsGo
+module github.com/pkp2207/BlogsGo/backend
 
 go 1.22.5
 
