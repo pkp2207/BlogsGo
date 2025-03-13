@@ -17,6 +17,7 @@ const Blogs = () => {
     const fetchBlogs = async () => {
       try {
         const blogsData: Blog[] = await getBlogs();
+        console.log("Using API URL:", process.env.NEXT_PUBLIC_API_URL);
         setBlogs(blogsData);
         setFilteredBlogs(blogsData);
       } catch (error) {

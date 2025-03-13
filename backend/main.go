@@ -28,7 +28,7 @@ func main() {
 
 	// ✅ Updated CORS to allow frontend requests from Render
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"*"}, // Allow frontend
+		AllowOrigins:     []string{"https://pkp-blogsgo.onrender.com"}, // Allow frontend domain
 		AllowMethods:     []string{"GET", "POST", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Type"},
 		ExposeHeaders:    []string{"Content-Length"},
