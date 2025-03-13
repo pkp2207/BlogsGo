@@ -28,7 +28,7 @@ func main() {
 
 	// ✅ Updated CORS to allow frontend requests from Render
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"FRONTEND_URL"}, // Allow frontend
+		AllowOrigins:     []string{"*"}, // Allow frontend
 		AllowMethods:     []string{"GET", "POST", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Type"},
 		ExposeHeaders:    []string{"Content-Length"},
