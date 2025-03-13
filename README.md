@@ -1,6 +1,6 @@
-# PKPBlogsGo
+# BlogsGo
 
-PKPBlogsGo is a foundational Go application designed to retrieve and display data from a MongoDB Atlas database. The application is currently deployed at [BlogsGo](https://pkp-blogsgo.vercel.app/). Future updates will include enhanced UI and styling.
+BlogsGo is a foundational Go application designed to retrieve and display data from a MongoDB Atlas database. The application is currently deployed at [BlogsGo](https://pkp-blogsgo.vercel.app/). Future updates will include enhanced UI and styling.
 
 ## Deployment
 The backend is hosted on Render, and the frontend is deployed on Vercel.
