@@ -29,17 +29,12 @@ If you prefer to run the services separately:
    ```
 
 ## Environment Variables
-Make sure to set up the required environment variables, including `MONGODB_URI` with the appropriate credentials. Contact me if you need access.
+Make sure to set up the required environment variables, including `MONGODB_URI` with the appropriate credentials.
 
 ## Features
 - Backend built with **Go** and **Gin** framework
 - Frontend built with **Next.js** and **React**
 - Uses **MongoDB Atlas** for data storage
 - API endpoints for retrieving and managing blogs
-- Responsive UI (upcoming improvements planned)
+- Responsive UI
 
-## Contributing
-Contributions are welcome! Feel free to open issues or submit pull requests.
-
-## License
-This project is licensed under the MIT License.
