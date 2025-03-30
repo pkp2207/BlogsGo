@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -16,6 +16,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { LogOut, MailCheck } from 'lucide-react';
+import axios from "axios";
 
 // Define the schema using Zod
 const formSchema = z.object({
@@ -29,10 +30,19 @@ const NewsLetterSignup: React.FC = () => {
       email: '',
     },
   });
+  const [message, setMessage] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const onSubmit = (values: { email: string }) => {
-    console.log('Form Submitted:', values);
-    // Handle the form submission, e.g., send data to an API
+  const onSubmit = async (values: { email: string }) => {
+    try {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/subscribe`, values);
+      setMessage(response.data.message);
+      setError(null);
+      form.reset();
+    } catch (err: any) {
+      setError(err.response?.data?.error || "An error occurred");
+      setMessage(null);
+    }
   };
 
   return (
@@ -67,12 +77,14 @@ const NewsLetterSignup: React.FC = () => {
             />
             <div className="flex justify-center">
               <Button type="submit" variant="outline" className="flex gap-4 items-center border-[#256EFF]">
-              <MailCheck />
+                <MailCheck />
                 Subscribe
               </Button>
             </div>
           </form>
         </Form>
+        {message && <p className="text-center text-green-600">{message}</p>}
+        {error && <p className="text-center text-red-600">{error}</p>}
       </div>
     </div>
   );

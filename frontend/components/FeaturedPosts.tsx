@@ -8,21 +8,21 @@ const postsData = {
   Posts: [
     {
       id: 1,
-      title: "Post Title 1",
-      description: "A brief description of the blog post...",
-      href: "/blogs/post-1",
+      title: "Exploring the Future of AI",
+      description: "Artificial Intelligence is transforming industries ...",
+      href: "/blogs/66865c543788fc189e828bcd",
     },
     {
       id: 2,
-      title: "Post Title 2",
-      description: "A brief description of the blog post...",
-      href: "/blogs/post-2",
+      title: "The Rise of Remote Work",
+      description: "Remote work has become a significant trend, ...",
+      href: "/blogs/66865d647ff2881714472e9b",
     },
     {
       id: 3,
-      title: "Post Title 3",
-      description: "A brief description of the blog post...",
-      href: "/blogs/post-3",
+      title: "Sustainable Living: Tips and Tricks",
+      description: "Sustainability is more important than ever, and ...",
+      href: "/blogs/668776794388b46b28a03e19",
     },
   ],
 };
